@@ -45,16 +45,3 @@ class BaseModel:
 
         return new_dict
 
-mymodel = BaseModel()
-mymodel.number = 90
-mymodel.name = "John"
-print(mymodel)
-mymodel.save()
-print("\n")
-print(mymodel)
-print("\n")
-my_model_json = mymodel.to_dict()
-print(my_model_json)
-print("JSON of my_model:")
-for key in my_model_json.keys():
-    print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
