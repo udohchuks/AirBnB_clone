@@ -1,42 +1,55 @@
 #!/usr/bin/python3
+
 """
 FileStorage Module
+process -> <class 'BaseModel'> -> to_dict() -> <class 'dict'>
+-> JSON dump -> <class 'str'> -> FILE -> <class 'str'>
+-> JSON load -> <class 'dict'> -> <class 'BaseModel'>
 """
+
 import os
 import json
+from models.base_model import BaseModel as BM
 
 
 class FileStorage:
-    """
-    File Storage Module
-    """
     __file_path = "file.json"
     __objects = {}
 
-    def __init__(self):
-        """Constructor for FileStorage"""
-        pass
-
     def all(self):
-        """Return FileStorage"""
-        return FileStorage.__objects
+        """Returns The self.__objects"""
+        return self.__objects
 
     def new(self, obj):
-        """set obj in __object"""
-        cls_name = obj.__class__.__name__
-        FileStorage\
-            .__objects["{}.{}".format(cls_name, obj.id)] = obj.to_dict()
+        """Create a dictionary in self.__object
+        key: value
+            key: <class name>.<class id>
+            value: is the object (__str__)
+        """
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        self.__objects[key] = obj
 
     def save(self):
+        """Saves in the file.json
+        form:
+            key:obj.to_dict()
         """
-        Serializes __objects to json
-        """
-        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
-            json.dump(FileStorage.__objects, f)
+        obj_dict = {key: obj.to_dict() for key, obj in self.__objects.items()}
+        with open(self.__file_path, "w") as f:
+            json.dump(obj_dict, f)
 
     def reload(self):
-        """deserializes the json file if it exists"""
-        if os.path.exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
-                FileStorage.__objects = json.load(f)
-                return FileStorage.__objects
+        """Loads the json data back into the self.__objects
+           Why:
+                Because when ever we rerun our program our
+                data in __object is lost
+            Data in json is of the form:
+                key:obj.to_dict()
+            So we must convert back the obj.to_dict() to an obj
+            by using BaseModel(**value[i.e, obj.to_dict()])
+        """
+        if os.path.exists(self.__file_path):
+            with open(self.__file_path, "r") as f:
+                loaded_objs = json.load(f)
+                for key, value in loaded_objs.items():
+                    self.__objects[key] = BM(**value)
