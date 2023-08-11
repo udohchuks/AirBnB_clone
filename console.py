@@ -6,7 +6,7 @@ import sys
 from models import storage
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
-
+from models.user import User
 
 class Dictionary(dict):
     """Over riding the dict class"""
@@ -17,6 +17,7 @@ class Dictionary(dict):
 
 my_models = Dictionary()
 my_models["BaseModel"] = BaseModel()
+my_models["User"] = User()
 
 
 class HBNBCommand(cmd.Cmd):
@@ -172,6 +173,14 @@ class HBNBCommand(cmd.Cmd):
         print("Update an instance's attributes based on class name and id.")
         print("Usage: update <class name> <instance id> <attribute> <value>")
         print("Example: update BaseModel 1234-1234-1234 name 'New Name'")
+
+    def precmd(self, line):
+        if "." in line:
+            line = line.replace(".", " ").replace("(", "").replace(")","")\
+                    .replace(",", " ").replace('"', " ")
+            arg = line.split()
+            line = "{} {}".format(arg[1], arg[0])
+        return cmd.Cmd.precmd(self, line)
 
 
 def run_interactive():
