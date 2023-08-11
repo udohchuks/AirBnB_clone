@@ -9,7 +9,8 @@ process -> <class 'BaseModel'> -> to_dict() -> <class 'dict'>
 
 import os
 import json
-from models.base_model import BaseModel as BM
+from models.base_model import BaseModel
+from models.user import User
 
 
 class FileStorage:
@@ -52,4 +53,4 @@ class FileStorage:
             with open(self.__file_path, "r") as f:
                 loaded_objs = json.load(f)
                 for key, value in loaded_objs.items():
-                    self.__objects[key] = BM(**value)
+                    self.__objects[key] = eval(value["__class__"])(**value)
