@@ -57,7 +57,8 @@ class HBNBCommand(cmd.Cmd):
             return
         key = "{}.{}".format(args[0], args[1])
         objects = storage.all()
-        if key in objects:
+        keys_to_iterate = list(objects)
+        if key in keys_to_iterate:
             print(objects[key])
         else:
             print("** no instance found **")
@@ -76,7 +77,8 @@ class HBNBCommand(cmd.Cmd):
             return
         key = "{}.{}".format(args[0], args[1])
         objects = storage.all()
-        if key in objects:
+        keys_to_iterate = list(objects)
+        if key in keys_to_iterate:
             del objects[key]
             storage.save()
         else:
@@ -86,13 +88,17 @@ class HBNBCommand(cmd.Cmd):
         """Displays all Objects"""
         objects = []
         all_objs = storage.all()
+        keys_to_iterate = list(all_objs.keys())
         if not arg:
-            for obj in all_objs.values():
-                print(obj)
+            for key in keys_to_iterate:
+                obj = all_objs[key]
+                objects.append(str(obj))
+            print(objects)
         elif arg in my_models:
-            for obj in all_objs.values():
-                if type(obj) is type(eval(arg)()):
-                    print(obj)
+            for keys in keys_to_iterate:
+                obj = all_objs[keys]
+                if isinstance(obj, eval(arg)):
+                    objects.append(str(obj))
             print(objects)
         else:
             print("** class doesn't exist **")
@@ -117,7 +123,8 @@ class HBNBCommand(cmd.Cmd):
             return
         key = "{}.{}".format(args[0], args[1])
         all_objs = storage.all()
-        if key in all_objs:
+        keys_to_iterate = list(all_objs)
+        if key in keys_to_iterate:
             obj = all_objs[key]
             attr_name = args[2]
             attr_value = args[3]
@@ -131,12 +138,14 @@ class HBNBCommand(cmd.Cmd):
     def do_count(self, arg):
         """Count object"""
         all_obj = storage.all()
+        keys_to_iterate = list(all_obj.keys())
         count = 0
         if not arg:
             print("** class name missing **")
         elif arg in my_models:
-            for obj in all_obj.values():
-                if isinstance(obj, type(eval(arg)())):
+            for key in keys_to_iterate:
+                obj = all_obj[key]
+                if isinstance(obj, eval(arg)):
                     count += 1
             print(count)
         else:
