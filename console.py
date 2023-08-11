@@ -7,18 +7,7 @@ from models import storage
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models.user import User
-
-class Dictionary(dict):
-    """Over riding the dict class"""
-    def __missing__(self, key):
-        """Output False if key  is not found"""
-        return False
-
-
-my_models = Dictionary()
-my_models["BaseModel"] = BaseModel()
-my_models["User"] = User()
-
+my_models = ["User", "BaseModel"]
 
 class HBNBCommand(cmd.Cmd):
     """HBNB command interpreter."""
@@ -60,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        if not my_models[args[0]]:
+        if args[0] not in my_models:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -79,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        if not my_models[args[0]]:
+        if args[0] not in my_models:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -100,11 +89,10 @@ class HBNBCommand(cmd.Cmd):
         if not arg:
             for obj in all_objs.values():
                 print(obj)
-        elif my_models[arg]:
-            for obj_id in all_objs.keys():
-                obj = all_objs[obj_id]
-                if isinstance(obj, type(my_models[arg])):
-                    objects.append(str(obj))
+        elif arg in my_models:
+            for obj in all_objs.values():
+                if type(obj) is type(eval(arg)()):
+                    print(obj)
             print(objects)
         else:
             print("** class doesn't exist **")
@@ -115,7 +103,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        if not my_models[args[0]]:
+        if args[0] not in my_models:
             print("** class doesn't exist **")
             return
         if len(args) < 2:
@@ -139,6 +127,20 @@ class HBNBCommand(cmd.Cmd):
             obj.save()
         else:
             print("** no instance found **")
+
+    def do_count(self, arg):
+        """Count object"""
+        all_obj = storage.all()
+        count = 0
+        if not arg:
+            print("** class name missing **")
+        elif arg in my_models:
+            for obj in all_obj.values():
+                if isinstance(obj, type(eval(arg)())):
+                    count += 1
+            print(count)
+        else:
+            print("** class doesn't exit**")
 
     def help_create(self):
         """Display help for create"""
