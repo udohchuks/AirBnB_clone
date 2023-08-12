@@ -74,3 +74,22 @@ EOF  help  quit
 (hbnb) 
 $
 ```
+### Example
+```bash
+samuel@DESKTOP-3FSFCSN:~/AirBnB_clone$ ./console.py
+(hbnb) all
+[]
+(hbnb) create User
+682b5903-54cf-4903-a925-1e26346a28c5
+(hbnb) all
+["[User] (682b5903-54cf-4903-a925-1e26346a28c5) {'id': '682b5903-54cf-4903-a925-1e26346a28c5', 'created_at': datetime.datetime(2023, 8, 12, 12, 26, 47, 863098), 'updated_at': datetime.datetime(2023, 8, 12, 12, 26, 47, 863129)}"]
+(hbnb) show User 682b5903-54cf-4903-a925-1e26346a28c5
+[User] (682b5903-54cf-4903-a925-1e26346a28c5) {'id': '682b5903-54cf-4903-a925-1e26346a28c5', 'created_at': datetime.datetime(2023, 8, 12, 12, 26, 47, 863098), 'updated_at': datetime.datetime(2023, 8, 12, 12, 26, 47, 863129)}
+(hbnb) update User 682b5903-54cf-4903-a925-1e26346a28c5 password my_pass
+(hbnb) show User 682b5903-54cf-4903-a925-1e26346a28c5
+[User] (682b5903-54cf-4903-a925-1e26346a28c5) {'id': '682b5903-54cf-4903-a925-1e26346a28c5', 'created_at': datetime.datetime(2023, 8, 12, 12, 26, 47, 863098), 'updated_at': datetime.datetime(2023, 8, 12, 12, 27, 41, 215466), 'password': 'my_pass'}
+(hbnb) destroy User 682b5903-54cf-4903-a925-1e26346a28c5
+(hbnb) all
+[]
+(hbnb)
+```
