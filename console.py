@@ -193,24 +193,13 @@ class HBNBCommand(cmd.Cmd):
             arg = line.split()
             if (len(arg) < 4):
                 line = "{} {}".format(arg[1], arg[0])
+            if (len(arg) == 3):
+                line = "{} {} {}".format(arg[1], arg[0], arg[2])
         return cmd.Cmd.precmd(self, line)
     
     def emptyline(self):
         """Do nothing on an empty line."""
         pass
-
-
-# def run_interactive():
-#     """Run the interactive command interpreter."""
-#     cli = HBNBCommand()
-#     cli.cmdloop()
-
-
-# def run_non_interactive():
-#     """Run the non-interactive command interpreter."""
-#     cli = HBNBCommand()
-#     for line in sys.stdin:
-#         cli.onecmd(line.strip())
 
 
 if __name__ == "__main__":
