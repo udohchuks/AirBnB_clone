@@ -187,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
         print("Example: update BaseModel 1234-1234-1234 name 'New Name'")
 
     def precmd(self, line):
-        if "." in line:
+        if "." in line and ")" in line:
             line = line.replace(".", " ").replace("(", "").replace(")", "")\
                     .replace(",", " ").replace('"', " ")
             arg = line.split()
@@ -195,6 +195,8 @@ class HBNBCommand(cmd.Cmd):
                 line = "{} {}".format(arg[1], arg[0])
             if (len(arg) == 3):
                 line = "{} {} {}".format(arg[1], arg[0], arg[2])
+            if (len(arg) == 5):
+                line = "{} {} {} {} {}".format(arg[1], arg[0], arg[2], arg[3], arg[4])
         return cmd.Cmd.precmd(self, line)
     
     def emptyline(self):
