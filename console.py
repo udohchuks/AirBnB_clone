@@ -214,7 +214,4 @@ def run_non_interactive():
 
 
 if __name__ == "__main__":
-    if sys.stdin.isatty():
-        run_interactive()
-    else:
-        run_non_interactive()
+    HBNBCommand().cmdloop()
