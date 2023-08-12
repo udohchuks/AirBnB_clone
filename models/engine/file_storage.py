@@ -14,6 +14,9 @@ from models.user import User
 
 
 class FileStorage:
+    """
+    File Storage class
+    """
     __file_path = "file.json"
     __objects = {}
 
