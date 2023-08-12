@@ -12,7 +12,8 @@ from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
-my_models = ["User", "BaseModel", "City", "Place","Review", "State", "Amenity"]
+my_models = \
+    ["User", "BaseModel", "City", "Place", "Review", "State", "Amenity"]
 
 
 class HBNBCommand(cmd.Cmd):
@@ -201,9 +202,10 @@ class HBNBCommand(cmd.Cmd):
             if (len(arg) == 3):
                 line = "{} {} {}".format(arg[1], arg[0], arg[2])
             if (len(arg) == 5):
-                line = "{} {} {} {} {}".format(arg[1], arg[0], arg[2], arg[3], arg[4])
+                line = "{} {} {} {} {}"\
+                    .format(arg[1], arg[0], arg[2], arg[3], arg[4])
         return cmd.Cmd.precmd(self, line)
-    
+
     def emptyline(self):
         """Do nothing on an empty line."""
         pass

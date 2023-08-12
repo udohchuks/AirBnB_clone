@@ -76,10 +76,6 @@ class BaseTest(unittest.TestCase):
         model.number = 89
         model.name = "My_model"
         model2 = BaseModel(**model.to_dict())
-        print(" ")
-        print(model2)
-        print("----\n")
-        print(model2)
         self.assertNotEqual(model, model2)
 
 
