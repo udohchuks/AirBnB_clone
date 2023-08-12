@@ -200,18 +200,22 @@ class HBNBCommand(cmd.Cmd):
         pass
 
 
-def run_interactive():
-    """Run the interactive command interpreter."""
-    cli = HBNBCommand()
-    cli.cmdloop()
+# def run_interactive():
+#     """Run the interactive command interpreter."""
+#     cli = HBNBCommand()
+#     cli.cmdloop()
 
 
-def run_non_interactive():
-    """Run the non-interactive command interpreter."""
-    cli = HBNBCommand()
-    for line in sys.stdin:
-        cli.onecmd(line.strip())
+# def run_non_interactive():
+#     """Run the non-interactive command interpreter."""
+#     cli = HBNBCommand()
+#     for line in sys.stdin:
+#         cli.onecmd(line.strip())
 
 
 if __name__ == "__main__":
+    # if sys.stdin.isatty():
+    #     run_interactive()
+    # else:
+    #     run_non_interactive()
     HBNBCommand().cmdloop()
