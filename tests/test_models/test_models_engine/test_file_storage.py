@@ -16,12 +16,12 @@ class TestFileStorage(unittest.TestCase):
         """SetUp Class"""
         self.storage = FileStorage()
         self.storage.reload()
-    
+
     def tearDown(self):
         """If File exist after each call of test remove file"""
         if os.path.exists(self.storage._FileStorage__file_path):
             os.remove(self.storage._FileStorage__file_path)
-    
+
     def test_reload(self):
         """Test Reload"""
         obj = BaseModel()
@@ -33,6 +33,7 @@ class TestFileStorage(unittest.TestCase):
             obj = all_objs[obj_id]
             self.assertEqual(obj.to_dict()["name"], "Test")
             self.assertEqual(obj.to_dict()["number"], 90)
+
 
 if __name__ == '__main__':
     unittest.main()
