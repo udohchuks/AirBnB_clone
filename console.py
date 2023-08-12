@@ -9,6 +9,7 @@ from models.engine.file_storage import FileStorage
 from models.user import User
 my_models = ["User", "BaseModel"]
 
+
 class HBNBCommand(cmd.Cmd):
     """HBNB command interpreter."""
 
@@ -187,10 +188,11 @@ class HBNBCommand(cmd.Cmd):
 
     def precmd(self, line):
         if "." in line:
-            line = line.replace(".", " ").replace("(", "").replace(")","")\
+            line = line.replace(".", " ").replace("(", "").replace(")", "")\
                     .replace(",", " ").replace('"', " ")
             arg = line.split()
-            line = "{} {}".format(arg[1], arg[0])
+            if (len(arg) < 4):
+                line = "{} {}".format(arg[1], arg[0])
         return cmd.Cmd.precmd(self, line)
 
 
