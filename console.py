@@ -187,13 +187,13 @@ class HBNBCommand(cmd.Cmd):
         print("Example: update BaseModel 1234-1234-1234 name 'New Name'")
 
     def precmd(self, line):
-        # if "." in line:
-        #     line = line.replace(".", " ").replace("(", "").replace(")", "")\
-        #             .replace(",", " ").replace('"', " ")
-        #     arg = line.split()
-        #     if (len(arg) < 4):
-        #         line = "{} {}".format(arg[1], arg[0])
-        # return cmd.Cmd.precmd(self, line)
+        if "." in line:
+            line = line.replace(".", " ").replace("(", "").replace(")", "")\
+                    .replace(",", " ").replace('"', " ")
+            arg = line.split()
+            if (len(arg) < 4):
+                line = "{} {}".format(arg[1], arg[0])
+        return cmd.Cmd.precmd(self, line)
     
     def emptyline(self):
         """Do nothing on an empty line."""
@@ -214,8 +214,4 @@ class HBNBCommand(cmd.Cmd):
 
 
 if __name__ == "__main__":
-    # if sys.stdin.isatty():
-    #     run_interactive()
-    # else:
-    #     run_non_interactive()
     HBNBCommand().cmdloop()
