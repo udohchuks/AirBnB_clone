@@ -74,7 +74,7 @@ EOF  help  quit
 (hbnb) 
 $
 ```
-### Example
+## Example
 ```bash
 samuel@DESKTOP-3FSFCSN:~/AirBnB_clone$ ./console.py
 (hbnb) all
