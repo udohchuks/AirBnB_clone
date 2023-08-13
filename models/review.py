@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """This is the review class"""
+
 from models.base_model import BaseModel
 
 
@@ -10,10 +11,7 @@ class Review(BaseModel):
         user_id: user id
         text: review description
     """
+
     place_id = ""
     user_id = ""
     text = ""
-
-    def __init__(self, *args, **kwargs):
-        """Constructor"""
-        super().__init__(*args, **kwargs)
