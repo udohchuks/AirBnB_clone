@@ -9,7 +9,3 @@ class Amenity(BaseModel):
         name: input name
     """
     name = ""
-
-    def __init__(self, *args, **kwargs):
-        """Constructor"""
-        super().__init__(*args, **kwargs)

@@ -9,7 +9,3 @@ class State(BaseModel):
         name: input name
     """
     name = ""
-
-    def __init__(self, *args, **kwargs):
-        """ Constructorr"""
-        super().__init__(*args, **kwargs)
