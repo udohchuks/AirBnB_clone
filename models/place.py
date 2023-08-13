@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """This is the place class"""
+
 from models.base_model import BaseModel
 
 
@@ -18,6 +19,7 @@ class Place(BaseModel):
         longitude: longitude in float
         amenity_ids: list of Amenity ids
     """
+
     city_id = ""
     user_id = ""
     name = ""

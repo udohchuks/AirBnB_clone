@@ -8,6 +8,7 @@ from models.base_model import BaseModel
 
 class User(BaseModel):
     """Inherits from Base Module"""
+
     email = ""
     password = ""
     first_name = ""
