@@ -23,42 +23,42 @@ class TestFileStorage(unittest.TestCase):
         """SetUp Class"""
         self.storage = FileStorage()
         self.storage.reload()
-        
+
         self.amenity = Amenity()
         self.amenity.name = "Wi-Fi"
         self.amenity.save()
-        
+
         self.place = Place()
         self.place.city_id = "city123"
         self.place.user_id = "user789"
         self.place.name = "Cozy Cabin"
-        self.place.description = "A beautiful cabin in the woods."
+        self.place.description = "A beautiful"
         self.place.number_rooms = 2
         self.place.number_bathrooms = 1
         self.place.max_guest = 4
         self.place.price_by_night = 100
         self.place.latitude = 37.7749
         self.place.longitude = -122.4194
-        self.place.amenity_ids = ["amenity1", "amenity2"]
+        self.place.amenity_ids = ["amenity1"]
         self.place.save()
 
         self.city = City()
         self.city.state_id = "state789"
         self.city.name = "Los Angeles"
         self.city.save()
-        
+
         self.user = User()
         self.user.email = "test@example.com"
         self.user.first_name = "John"
         self.user.last_name = "Doe"
         self.user.save()
-        
+
         self.review = Review()
         self.review.place_id = "place123"
         self.review.user_id = "user456"
         self.review.text = "Great place!"
         self.review.save()
-        
+
         self.state = State()
         self.state.name = "California"
         self.state.save()
@@ -70,7 +70,6 @@ class TestFileStorage(unittest.TestCase):
 
     def test_reload_base_model(self):
         """Test Reload"""
-        print(self.base.name)
         all_objs = self.storage.all()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
@@ -135,15 +134,15 @@ class TestFileStorage(unittest.TestCase):
                 self.assertEqual(obj.to_dict()["city_id"], "city123")
                 self.assertEqual(obj.to_dict()["user_id"], "user789")
                 self.assertEqual(obj.to_dict()["name"], "Cozy Cabin")
-                self.assertEqual(obj.to_dict()["description"], "A beautiful cabin in the woods.")
+                self.assertEqual(obj.to_dict()["description"], "A beautiful")
                 self.assertEqual(obj.to_dict()["number_rooms"], 2)
                 self.assertEqual(obj.to_dict()["number_bathrooms"], 1)
                 self.assertEqual(obj.to_dict()["max_guest"], 4)
                 self.assertEqual(obj.to_dict()["price_by_night"], 100)
                 self.assertEqual(obj.to_dict()["latitude"], 37.7749)
                 self.assertEqual(obj.to_dict()["longitude"], -122.4194)
-                self.assertEqual(obj.to_dict()["amenity_ids"], ["amenity1", "amenity2"])
-           
+                self.assertEqual(obj.to_dict()["amenity_ids"], ["amenity1"])
+
 
 if __name__ == '__main__':
     unittest.main()
