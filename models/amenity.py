@@ -8,4 +8,4 @@ class Amenity(BaseModel):
     Attributes:
         name: input name
     """
-     name = ""
+    name = ""

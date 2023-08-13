@@ -9,8 +9,5 @@ class City(BaseModel):
         state_id: The state id
         name: input name
     """
-     def __init__(self, *args, **kwargs):
-        """Constructor"""
-        super().__init__(*args, **kwargs)
-        self.state_id = ""
-        self.name = ""
+    state_id = ""
+    name = ""
