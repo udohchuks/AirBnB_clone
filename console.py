@@ -12,8 +12,17 @@ from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
+import re
 my_models = \
     ["User", "BaseModel", "City", "Place", "Review", "State", "Amenity"]
+
+
+def custom_split(line):
+    """Split line into array"""
+    pattern = r'("[^"]+"|\S+)'
+    matches = re.findall(pattern, line)
+    result = [match.strip('"') for match in matches]
+    return result
 
 
 class HBNBCommand(cmd.Cmd):
@@ -112,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """Updates Class Instance"""
-        args = line.split()
+        args = custom_split(line)
         if not args:
             print("** class name missing **")
             return
@@ -135,6 +144,8 @@ class HBNBCommand(cmd.Cmd):
             obj = all_objs[key]
             attr_name = args[2]
             attr_value = args[3]
+            if '"' in attr_value:
+                attr_value = attr_value.replace('"', "")
             attr_value_type = type(getattr(obj, attr_name))
             new_value = attr_value_type(attr_value)
             setattr(obj, attr_name, new_value)
