@@ -144,10 +144,11 @@ class HBNBCommand(cmd.Cmd):
             obj = all_objs[key]
             attr_name = args[2]
             attr_value = args[3]
-            attr_value_type = type(getattr(obj, attr_name))
-            new_value = attr_value_type(attr_value)
-            setattr(obj, attr_name, new_value)
-            obj.save()
+            if hasattr(obj, attr_name):
+                attr_value_type = type(getattr(obj, attr_name))
+                new_value = attr_value_type(attr_value)
+                setattr(obj, attr_name, new_value)
+                obj.save()
         else:
             print("** no instance found **")
 

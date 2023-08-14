@@ -73,7 +73,7 @@ class TestFileStorage(unittest.TestCase):
         all_objs = self.storage.all()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
-            if obj.to_dict()["__class__"] == "BaseModel":
+            if obj.to_dict()["id"] == self.base.id:
                 self.assertEqual(obj.to_dict()["name"], "Test")
                 self.assertEqual(obj.to_dict()["number"], 90)
 
@@ -82,7 +82,7 @@ class TestFileStorage(unittest.TestCase):
         all_objs = self.storage.all()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
-            if isinstance(obj, User):
+            if obj.to_dict()["id"] == self.user.id:
                 self.assertEqual(obj.to_dict()["email"], "test@example.com")
                 self.assertEqual(obj.to_dict()["first_name"], "John")
                 self.assertEqual(obj.to_dict()["last_name"], "Doe")
@@ -92,7 +92,7 @@ class TestFileStorage(unittest.TestCase):
         all_objs = self.storage.all()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
-            if isinstance(obj, Review):
+            if obj.to_dict()["id"] == self.review.id:
                 self.assertEqual(obj.to_dict()["place_id"], "place123")
                 self.assertEqual(obj.to_dict()["user_id"], "user456")
                 self.assertEqual(obj.to_dict()["text"], "Great place!")
@@ -102,7 +102,7 @@ class TestFileStorage(unittest.TestCase):
         all_objs = self.storage.all()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
-            if isinstance(obj, State):
+            if obj.to_dict()["id"] == self.state.id:
                 self.assertEqual(obj.to_dict()["name"], "California")
 
     def test_reload_city(self):
@@ -110,7 +110,7 @@ class TestFileStorage(unittest.TestCase):
         all_objs = self.storage.all()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
-            if isinstance(obj, City):
+            if obj.to_dict()["id"] == self.city.id:
                 self.assertEqual(obj.to_dict()["state_id"], "state789")
                 self.assertEqual(obj.to_dict()["name"], "Los Angeles")
 
@@ -121,7 +121,7 @@ class TestFileStorage(unittest.TestCase):
         self.storage.reload()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
-            if isinstance(obj, Amenity):
+            if obj.to_dict()["id"] == self.amenity.id:
                 self.assertEqual(getattr(obj, "name"), "Wi-Fi")
 
     def test_reload_place(self):
@@ -130,7 +130,7 @@ class TestFileStorage(unittest.TestCase):
         all_objs = self.storage.all()
         for obj_id in all_objs.keys():
             obj = all_objs[obj_id]
-            if isinstance(obj, Place):
+            if obj.to_dict()["id"] == self.place.id:
                 self.assertEqual(obj.to_dict()["city_id"], "city123")
                 self.assertEqual(obj.to_dict()["user_id"], "user789")
                 self.assertEqual(obj.to_dict()["name"], "Cozy Cabin")
